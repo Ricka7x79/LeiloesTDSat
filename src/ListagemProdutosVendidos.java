@@ -119,21 +119,17 @@ public class ListagemProdutosVendidos extends javax.swing.JFrame {
     private void listarProdutosVendidos() {
     try {
         ProdutosDAO dao = new ProdutosDAO();
-
-        // Pega o modelo da tabela e limpa as linhas existentes
         DefaultTableModel model = (DefaultTableModel) tabelaVendas.getModel();
         model.setNumRows(0);
 
-        // Pega a lista de produtos vendidos do DAO
-        ArrayList<ProdutosDTO> produtos = dao.listarProdutosVendidos();
+        ArrayList<ProdutosDTO> lista = dao.listarProdutosVendidos();
 
-        // Itera sobre os produtos e adiciona na tabela
-        for (ProdutosDTO produto : produtos) {
+        for (int i = 0; i < lista.size(); i++) {
             model.addRow(new Object[]{
-                produto.getId(),
-                produto.getNome(),
-                produto.getValor(),
-                produto.getStatus()
+                lista.get(i).getId(),
+                lista.get(i).getNome(),
+                lista.get(i).getValor(),
+                lista.get(i).getStatus()
             });
         }
 
